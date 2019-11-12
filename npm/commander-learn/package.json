@@ -1,0 +1,18 @@
+{
+  "name": "commander-learn",
+  "version": "1.0.0",
+  "description": "commander-learn",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "commander"
+  ],
+  "author": "clearives",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^4.0.0",
+    "shelljs": "^0.8.3"
+  }
+}
