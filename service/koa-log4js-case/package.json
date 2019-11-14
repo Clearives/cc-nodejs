@@ -1,0 +1,24 @@
+{
+  "name": "koa-log4js-demo",
+  "version": "1.0.0",
+  "description": "koa-log4js-case",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "keywords": [
+    "koa-log4js",
+    "koa2"
+  ],
+  "author": "clearives",
+  "license": "ISC",
+  "dependencies": {
+    "koa": "^2.11.0",
+    "koa-log4": "^2.3.2"
+  },
+  "devDependencies": {
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0"
+  }
+}
