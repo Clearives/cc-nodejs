@@ -3,7 +3,7 @@ import glob from 'glob'
 import koaCompose from 'koa-compose'
 
 export default () => {
-  let routers = [];
+  let routers = []
   glob.sync(path.resolve(__dirname, '*.js'))
     .filter(item => item.indexOf('index.js') === -1)
     .map(item => {
@@ -11,5 +11,5 @@ export default () => {
       routers.push(_router.routes());
       routers.push(_router.allowedMethods());
     });
-  return koaCompose(routers);
+  return koaCompose(routers)
 }
