@@ -2,7 +2,7 @@ import KoaRouter from 'koa-router'
 import api from './api'
 
 const Router = new KoaRouter
-Router.use(api.routes(), api.allowedMethods())
+Router.use(api.routes())
 Router.get('/', (ctx) => {
   ctx.body = 'index'
 })
