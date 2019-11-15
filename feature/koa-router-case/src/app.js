@@ -2,9 +2,7 @@ import Koa from 'koa'
 import routers from './routes';
 
 const app = new Koa()
-
-app.use(routers.routes())
-
+app.use(routers())
 app.on('error', (err, ctx) => {
   console.log('error', err)
 })

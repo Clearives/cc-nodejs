@@ -1,9 +1,15 @@
-import KoaRouter from 'koa-router'
-import api from './api'
+import path from 'path'
+import glob from 'glob'
+import koaCompose from 'koa-compose'
 
-const Router = new KoaRouter
-Router.use(api.routes())
-Router.get('/', (ctx) => {
-  ctx.body = 'index'
-})
-export default Router
+export default () => {
+  let routers = [];
+  glob.sync(path.resolve(__dirname, '*.js'))
+    .filter(item => item.indexOf('index.js') === -1)
+    .map(item => {
+      let _router = require(item).default
+      routers.push(_router.routes());
+      routers.push(_router.allowedMethods());
+    });
+  return koaCompose(routers);
+}
