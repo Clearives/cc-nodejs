@@ -4,7 +4,9 @@ const Router = new KoaRouter({
   prefix: '/api'
 })
 
-Router.get('/', (ctx) => {
-  ctx.body = 'api index'
+Router.get('/', (ctx, next) => {
+  ctx.status = 404
+  ctx.method = 'OPTIONS'
+  next()
 })
 export default Router
