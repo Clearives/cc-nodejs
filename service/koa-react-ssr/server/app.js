@@ -3,15 +3,17 @@ import React from 'react'
 import { StaticRouter } from 'react-router-dom'
 import { renderToString } from "react-dom/server"
 import Page from '../app/pages/index'
+import renderHtml  from './utils/renderHtml'
 
 const app = new koa()
 
 app.use((ctx, next) => {
-  ctx.body = renderToString(
+  let _content = renderToString(
     <StaticRouter location={ctx.url}>
       <Page />
     </StaticRouter>
   )
+  ctx.body = renderHtml(_content)
   next();
 })
 
