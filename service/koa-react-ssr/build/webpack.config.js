@@ -17,7 +17,9 @@ module.exports = {
     app: resolve('app/main.js'),
   },
   devServer: {
-    port: 8000,
+    port: 8080,
+    inline: true,
+    historyApiFallback: true,
   },
   module: {
     rules: [
