@@ -1,0 +1,26 @@
+{
+  "name": "koa-react-ssr",
+  "version": "1.0.0",
+  "description": "koa react ssr",
+  "main": "index.js",
+  "scripts": {
+    "dev:server": "nodemon ./server/"
+  },
+  "keywords": [
+    "ssr"
+  ],
+  "author": "clearives",
+  "license": "ISC",
+  "dependencies": {
+    "koa": "^2.11.0",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.7.0",
+    "@babel/core": "^7.7.2",
+    "@babel/preset-env": "^7.7.1",
+    "@babel/preset-react": "^7.7.0",
+    "@babel/register": "^7.7.0"
+  }
+}
