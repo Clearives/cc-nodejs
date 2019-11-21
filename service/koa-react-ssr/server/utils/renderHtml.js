@@ -10,6 +10,7 @@ const renderHtml = (content) => {
   </head>
   <body>
     <div id="app">${content}</div>
+    <script type="text/javascript" src="/app.bundle.js"></script>
   </body>
   </html>
   `
