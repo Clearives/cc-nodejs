@@ -2,16 +2,24 @@ import koa from 'koa'
 import React from 'react'
 import { StaticRouter } from 'react-router-dom'
 import { renderToString } from "react-dom/server"
-import Page from '../app/pages/index'
-import renderHtml  from './utils/renderHtml'
+import { Provider } from 'react-redux';
+import AppRouter from '../app/containers/router'
+import renderHtml from './utils/renderHtml'
+import getStore from './utils/store';
+
 
 const app = new koa()
 
 app.use((ctx, next) => {
+  const store = getStore()
+  const initialState = store.getState()
+  console.log(initialState);
   let _content = renderToString(
-    <StaticRouter location={ctx.url}>
-      <Page />
-    </StaticRouter>
+    <Provider store={store}>
+      <StaticRouter location={ctx.url}>
+        <AppRouter />
+      </StaticRouter>
+    </Provider>
   )
   ctx.body = renderHtml(_content)
   next();

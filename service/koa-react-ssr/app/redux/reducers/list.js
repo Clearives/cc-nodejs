@@ -1,5 +1,5 @@
 const initialState = {
-  num: 0
+  num: 100
 }
 
 export default function counter (state = initialState, action) {
