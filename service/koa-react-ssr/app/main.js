@@ -1,11 +1,15 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import Router from './pages'
+import { Provider } from 'react-redux';
+import store from './redux/store/index';
+import Router from './containers/router'
 
 render(
-  <BrowserRouter>
-    <Router />
-  </BrowserRouter>,
+  <Provider store={store()}>
+    <BrowserRouter>
+      <Router />
+    </BrowserRouter>
+  </Provider>,
   document.getElementById('app')
 );
