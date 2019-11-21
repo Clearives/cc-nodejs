@@ -41,6 +41,7 @@ module.exports = {
   output: {
     path: resolve('dist'),
     filename: "[name].bundle.js",
+    publicPath: '/'
   },
   plugins,
 };
