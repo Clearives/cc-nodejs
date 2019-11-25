@@ -15,6 +15,7 @@ const List = (props) => (
     <ul>
       {list.map((item, i) => <li key={i}>{item}</li>)}
     </ul>
+    <p>计数</p>
     <p>{props.num}</p>
     <button onClick={props.add}>add</button>
     <button onClick={props.minus}>minus</button>
