@@ -18,6 +18,7 @@ module.exports = {
       {
         test: /\.jsx?$/,
         include: resolve('app'),
+        exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
           options: {
