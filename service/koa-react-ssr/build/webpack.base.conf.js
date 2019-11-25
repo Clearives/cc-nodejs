@@ -10,16 +10,8 @@ let plugins = [
   })
 ]
 module.exports = {
-  mode: dev ? "development" : "production",
-  context: resolve('app'),
-  devtool: dev ? "inline-source-map" : "source-map",
   entry: {
     app: resolve('app/main.js'),
-  },
-  devServer: {
-    port: 8080,
-    inline: true,
-    historyApiFallback: true,
   },
   module: {
     rules: [
