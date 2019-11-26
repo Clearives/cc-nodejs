@@ -18,6 +18,7 @@ let plugins = [
 
 module.exports = merge(baseWebpackConfig, {
   mode: 'production',
+  devtool: 'false',
   output: {
     filename: 'js/[name].[chunkhash:8].bundle.js',
   },

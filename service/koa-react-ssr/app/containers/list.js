@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { add, minus, asyncAdd } from '../redux/actions/list'
+import { add, minus, asyncAdd } from '../redux/actions/list';
+import './home.css';
 
 
 const list = [
@@ -11,7 +12,7 @@ const list = [
 ]
 
 const List = (props) => (
-  <div>
+  <div className="home">
     <ul>
       {list.map((item, i) => <li key={i}>{item}</li>)}
     </ul>
