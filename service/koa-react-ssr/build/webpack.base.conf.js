@@ -1,5 +1,8 @@
 const { resolve } = require('./utils');
 
+const env = process.env.NODE_ENV;
+console.log(env);
+
 module.exports = {
   entry: {
     app: resolve('app/main.js'),
