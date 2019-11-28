@@ -3,3 +3,5 @@ node_modules/
 
 # service/koa-react-ssr/dist
 dist
+
+service/koa-mongo-case/build
