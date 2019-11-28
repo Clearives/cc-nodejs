@@ -1,0 +1,15 @@
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "node": "current" // https://github.com/babel/babel/issues/5085
+        }
+      }
+    ]
+  ],
+  "plugins": [
+    "add-module-exports"
+  ]
+}

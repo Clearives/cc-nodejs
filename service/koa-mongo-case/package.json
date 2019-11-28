@@ -1,0 +1,29 @@
+{
+  "name": "koa-mongo-case",
+  "version": "1.0.0",
+  "description": "koa mongo api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "mongo"
+  ],
+  "author": "clearives",
+  "license": "ISC",
+  "dependencies": {
+    "glob": "^7.1.6",
+    "koa": "^2.11.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-compose": "^4.1.0",
+    "koa-router": "^7.4.0",
+    "mongoose": "^5.7.12",
+    "shortid": "^2.2.15"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.4",
+    "@babel/preset-env": "^7.7.4",
+    "@babel/register": "^7.7.4",
+    "babel-plugin-add-module-exports": "^1.0.2"
+  }
+}
