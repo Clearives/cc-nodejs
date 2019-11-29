@@ -60,3 +60,70 @@ const res2 = await UrlModel.findById(id);
 const res3 = await UrlModel.findOne(options);
 // Model.where()与find类似
 ```
+
+## Queries 查询
+```
+$or　　　　或关系
+$nor　　　 或关系取反
+$gt　　　　大于
+$gte　　　 大于等于
+$lt　　　　小于
+$lte　　　 小于等于
+$ne       不等于
+$in       在多个值范围内
+$nin      不在多个值范围内
+$all      匹配数组中多个值
+$regex　　 正则，用于模糊查询
+$size　　　 匹配数组大小
+$maxDistance　　范围查询，距离（基于LBS）
+$mod　　   取模运算
+$near　　　 邻域查询，查询附近的位置（基于LBS）
+$exists　　 字段是否存在
+$elemMatch　　匹配内数组内的元素
+$within　　范围查询（基于LBS）
+$box　　　 范围查询，矩形范围（基于LBS）
+$center       范围醒询，圆形范围（基于LBS）
+$centerSphere　　范围查询，球形范围（基于LBS）
+$slice　　　　查询字段集合中的元素（比如从第几个之后，第N到第M个元素）
+```
+  
+## Populate（填充）
+Population 可以自动替换 document 中的指定字段，替换内容从其他 collection 获取。 我们可以填充（populate）单个或多个 document、单个或多个纯对象，甚至是 query 返回的一切对象。
+```js
+const urlSchema = new Schema({
+    urlCode: String,
+    longUrl: String,
+    author: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    }
+})
+
+async findOne(options) {
+    try {
+      const res = await this._model.findOne(options).populate({
+        path: 'author',
+        select: 'mobile -_id'
+      }).exec()
+      return res
+    } catch (e) {
+      throw e
+    }
+  };
+```
+
+## plugin（插件）
+Schema 是可拓展的，你可以用打包好的功能拓展你的 Schema
+```js
+export default (schema) => {
+  schema.options.toObject = schema.options.toJSON = {
+    transform(doc, ret) {
+      ret.id = ret._id;
+      delete ret.__v;
+      delete ret._id;
+    }
+  };
+}
+// use
+urlSchema.plugin(plugin)
+```
