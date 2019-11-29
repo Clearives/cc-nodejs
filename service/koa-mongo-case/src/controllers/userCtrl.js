@@ -1,5 +1,3 @@
-import shortid from 'shortid'
-import urlService from '../service/urlService'
 import userService from '../service/userService'
 import resp from '../utils/resp'
 /**
@@ -22,7 +20,7 @@ const pageQuerys = (ctx) => {
  */
 const findAll = async (ctx, next) => {
   const query = pageQuerys(ctx);
-  const res = await urlService.findAll(query);
+  const res = await userService.findAll(query);
   ctx.body = resp({
     data: res
   });
@@ -37,16 +35,12 @@ const findAll = async (ctx, next) => {
 const findOne = async (ctx, next) => {
   const query = ctx.request.body;
   const quertObj = {
-    longUrl: query.url
+    mobile: query.mobile
   }
-  const res = await urlService.findOne(quertObj);
+  const res = await userService.findOne(quertObj);
   if(res) {
     ctx.body = resp({
-      data: {
-        longUrl: res.longUrl,
-        urlCode: res.urlCode,
-        author: res.author ? res.author.mobile : null
-      }
+      data: res
     });
   } else {
     ctx.body = resp({
@@ -65,23 +59,20 @@ const findOne = async (ctx, next) => {
  */
 const create = async (ctx, next) => {
   const query = ctx.request.body;
-  const isExit = await urlService.findOne({longUrl: query.url});
+  const isExit = await userService.findOne({mobile: query.mobile});
   if(isExit) {
     ctx.body = resp({
       isOk: false,
       code: -1,
-      data: '数据已存在'
+      data: '该用户已存在'
     })
     return
   }
-  const urlCode = shortid.generate()
-  const urlObj = {
-    longUrl: query.url,
-    urlCode: urlCode,
-    author: query.userId
+  const userObj = {
+    mobile: query.mobile,
+    password: query.password
   }
-  const res = await urlService.create(urlObj);
-  await userService.findByIdAndUpdate(query.userId, {$addToSet: {urls: res._id}})
+  const res = await userService.create(userObj);
   ctx.body = resp({
     data: res
   })

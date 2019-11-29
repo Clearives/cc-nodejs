@@ -1,11 +1,11 @@
-import UrlModel from '../models/url'
+import UserModel from '../models/user'
 /**
  * 获取全部
  * @returns {Promise}
  */
 const findAll = async ({page=0, limit=20}) => {
   try {
-    const res = await UrlModel.find()
+    const res = await UserModel.find()
     .skip(page * limit).limit(limit).sort({'_id': -1}).exec()
     return res
   } catch (e) {
@@ -20,10 +20,11 @@ const findAll = async ({page=0, limit=20}) => {
  */
 const findOne = async (options) => {
   try {
-    const res = await UrlModel.findOne(options).populate({
-      path: 'author',
-      select: 'mobile -_id'
+    const res = await UserModel.findOne(options).populate({
+      path: 'urls',
+      select: 'longUrl urlCode -_id'
     }).exec()
+    console.log(res)
     return res
   } catch (e) {
     throw e
@@ -37,16 +38,30 @@ const findOne = async (options) => {
  */
 const create = async (options) => {
   try {
-    const res = await UrlModel.create(options);
+    const res = await UserModel.create(options);
     return res;
   } catch (e) {
     throw e;
   }
 };
 
+/**
+ * 更新
+ * @param options
+ * @returns {Promise}
+ */
+const findByIdAndUpdate = async (id, update) => {
+  try {
+    const res = await UserModel.findByIdAndUpdate(id, update).exec()
+    return res
+  } catch (e) {
+    throw e
+  }
+};
 
 export default {
   findAll,
   findOne,
-  create
+  create,
+  findByIdAndUpdate
 }
