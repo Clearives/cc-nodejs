@@ -23,12 +23,12 @@ class UrlService extends BaseService {
     }
   };
   /**
-   * @description findOneByAggregate 聚合管道
+   * @description findByAggregate 聚合管道
    * @param {*} options
    * @returns
    * @memberof UrlService
    */
-  async findOneByAggregate(options) {
+  async findByAggregate(options) {
     try {
       const res = await this._model.aggregate([
         {

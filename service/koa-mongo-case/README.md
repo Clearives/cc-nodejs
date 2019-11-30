@@ -141,7 +141,7 @@ async findOne(options) {
 ## aggregate 聚合管道
 
 ```js
-async findOneByAggregate(options) {
+async findByAggregate(options) {
     try {
       const res = await this._model.aggregate([
         {

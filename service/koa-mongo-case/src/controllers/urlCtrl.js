@@ -58,16 +58,16 @@ const findOne = async (ctx, next) => {
 };
 
 /**
- * @description findOneByAggregate
+ * @description findByAggregate
  * @param {*} ctx
  * @param {*} next
  */
-const findOneByAggregate = async (ctx, next) => {
+const findByAggregate = async (ctx, next) => {
   const query = ctx.request.body;
   const quertObj = {
     longUrl: query.url
   }
-  const res = await urlService.findOneByAggregate(quertObj);
+  const res = await urlService.findByAggregate(quertObj);
   console.log(res.length)
   if (res) {
     ctx.body = resp({
@@ -115,6 +115,6 @@ const create = async (ctx, next) => {
 export default {
   findAll,
   findOne,
-  findOneByAggregate,
+  findByAggregate,
   create
 }
