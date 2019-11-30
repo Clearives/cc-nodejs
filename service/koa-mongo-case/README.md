@@ -181,3 +181,7 @@ export default schema => {
 // use
 urlSchema.plugin(plugin);
 ```
+
+## 参考
+- [populate-vs-aggregate](https://stackoverflow.com/questions/55575806/mongoose-populate-vs-aggregate)
+![20191130193830.png](https://i.loli.net/2019/11/30/aYU7GycBbF1APKM.png)
