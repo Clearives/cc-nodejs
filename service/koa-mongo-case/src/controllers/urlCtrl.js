@@ -40,13 +40,38 @@ const findOne = async (ctx, next) => {
     longUrl: query.url
   }
   const res = await urlService.findOne(quertObj);
-  if(res) {
+  if (res) {
     ctx.body = resp({
       data: {
         longUrl: res.longUrl,
         urlCode: res.urlCode,
         author: res.author ? res.author.mobile : null
       }
+    });
+  } else {
+    ctx.body = resp({
+      isOk: false,
+      code: -1,
+      data: '查询不到数据'
+    });
+  }
+};
+
+/**
+ * @description findOneByAggregate
+ * @param {*} ctx
+ * @param {*} next
+ */
+const findOneByAggregate = async (ctx, next) => {
+  const query = ctx.request.body;
+  const quertObj = {
+    longUrl: query.url
+  }
+  const res = await urlService.findOneByAggregate(quertObj);
+  console.log(res.length)
+  if (res) {
+    ctx.body = resp({
+      data: res
     });
   } else {
     ctx.body = resp({
@@ -65,8 +90,8 @@ const findOne = async (ctx, next) => {
  */
 const create = async (ctx, next) => {
   const query = ctx.request.body;
-  const isExit = await urlService.findOne({longUrl: query.url});
-  if(isExit) {
+  const isExit = await urlService.findOne({ longUrl: query.url });
+  if (isExit) {
     ctx.body = resp({
       isOk: false,
       code: -1,
@@ -81,7 +106,7 @@ const create = async (ctx, next) => {
     author: query.userId
   }
   const res = await urlService.create(urlObj);
-  await userService.findByIdAndUpdate(query.userId, {$addToSet: {urls: res._id}})
+  await userService.findByIdAndUpdate(query.userId, { $addToSet: { urls: res._id } })
   ctx.body = resp({
     data: res
   })
@@ -90,5 +115,6 @@ const create = async (ctx, next) => {
 export default {
   findAll,
   findOne,
+  findOneByAggregate,
   create
 }
