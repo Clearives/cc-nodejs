@@ -21,8 +21,8 @@ const pageQuerys = (ctx) => {
  * @returns {Promise}
  */
 const findAll = async (ctx, next) => {
-  const redis_res = await ctx.state.redis.get('cc_nodejs_findAll');
   const query = pageQuerys(ctx);
+  const redis_res = await ctx.state.redis.get(`cc_nodejs_findAll${JSON.stringify(query)}`);
   let res;
   if (redis_res) {
     let _redis_res = JSON.parse(redis_res)
@@ -30,7 +30,7 @@ const findAll = async (ctx, next) => {
   } else {
     res = await urlService.findAll(query);
     if (res) {
-      await ctx.state.redis.set('cc_nodejs_findAll', JSON.stringify({
+      await ctx.state.redis.set(`cc_nodejs_findAll${JSON.stringify(query)}`, JSON.stringify({
         data: res,
         time: new Date().getTime()
       }), 'EX', 60)
