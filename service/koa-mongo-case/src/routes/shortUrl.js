@@ -11,6 +11,7 @@ Router.get('/', async (ctx, next) => {
 })
 
 Router.post('/create', urlCtrl.create)
+Router.get('/findAll', urlCtrl.findAll)
 Router.post('/find', urlCtrl.findOne)
 Router.post('/findByAggregate', urlCtrl.findByAggregate)
 

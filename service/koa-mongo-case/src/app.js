@@ -1,23 +1,30 @@
 import Koa from 'koa'
 import bodyParser from 'koa-bodyparser'
 import mongoose from 'mongoose'
+import Redis from 'ioredis'
 import routers from './routes'
-import { db } from './config'
+import { db, redisConfig } from './config'
 
-console.log(db)
+const redis = new Redis(redisConfig)
 
 mongoose.connect(db.mongodbUrl, {
   useCreateIndex: true,
-  useNewUrlParser:true,
-  useFindAndModify:false, 
+  useNewUrlParser: true,
+  useFindAndModify: false,
   useUnifiedTopology: true
 }).then(() => {
   console.log(`✅  Mongodb is Connected.Please have a great coding.`);
 })
 
 const app = new Koa()
+app.use(async (ctx, next) => {
+  ctx.state.redis = redis
+  await next()
+})
 app.use(bodyParser())
+
 app.use(routers())
+
 app.on('error', (err, ctx) => {
   console.log('error', err)
 })
