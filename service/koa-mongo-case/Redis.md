@@ -66,3 +66,34 @@ OK
 1) "cc1"
 2) "cc2"
 ```
+
+## mac下搭建redis集群（5.0+）
+![20191204114121.png](https://i.loli.net/2019/12/04/FDsHMnWfwjhEYdA.png)
+
+### 启动
+```bash
+redis-server redisCluter/7000/redis.conf &  redis-server redisCluter/7001/redis.conf &  redis-server redisCluter/7002/redis.conf &  redis-server redisCluter/7003/redis.conf &  redis-server redisCluter/7004/redis.conf &  redis-server redisCluter/7005/redis.conf
+```
+
+### 关闭
+```bash
+redis-cli -p 7002 shutdown & redis-cli -p 7003 shutdown & redis-cli -p 7004 shutdown 
+```
+
+### 配置
+```bash
+port 7000
+cluster-enabled yes
+cluster-config-file nodes-7000.conf
+```
+
+### 建立集群
+```bash
+// 5.0以前用redis-trib.rb，之后用redis-cli
+redis-cli --cluster create 127.0.0.1:7001 127.0.0.1:7002 127.0.0.1:7003 127.0.0.1:7004 127.0.0.1:7005 127.0.0.1:7006 --cluster-replicas 1
+```
+
+### 测试
+```bash
+redis-cli  --cluster check 127.0.0.1:7001
+```

@@ -5,8 +5,8 @@ import Redis from 'ioredis'
 import routers from './routes'
 import { db, redisConfig, redisIp } from './config'
 
-// const redis = new Redis(redisConfig)
-const redis = new Redis.Cluster(redisIp)
+const redis = new Redis(redisConfig)
+// const redis = new Redis.Cluster(redisIp)
 
 mongoose.connect(db.mongodbUrl, {
   useCreateIndex: true,
