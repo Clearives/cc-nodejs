@@ -114,13 +114,30 @@ const create = async (ctx, next) => {
     return
   }
   const urlCode = shortid.generate()
+  const sessionId = ctx.cookies.get('clearives')
+  if (!sessionId) {
+    ctx.body = resp({
+      isOk: false,
+      code: 412,
+      data: '未登录'
+    })
+  }
+  const resSession = await ctx.state.redis.get(`SESSION:${sessionId}`)
+  if (!resSession) {
+    ctx.body = resp({
+      isOk: false,
+      code: 412,
+      data: '未登录'
+    })
+  }
+  const author = (JSON.parse(resSession)).user._id
   const urlObj = {
     longUrl: query.url,
     urlCode: urlCode,
-    author: query.userId
+    author
   }
   const res = await urlService.create(urlObj);
-  await userService.findByIdAndUpdate(query.userId, { $addToSet: { urls: res._id } })
+  await userService.findByIdAndUpdate(author, { $addToSet: { urls: res._id } })
   ctx.body = resp({
     data: res
   })

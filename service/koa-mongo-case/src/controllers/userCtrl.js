@@ -38,7 +38,7 @@ const findOne = async (ctx, next) => {
     mobile: query.mobile
   }
   const res = await userService.findOne(quertObj);
-  if(res) {
+  if (res) {
     ctx.body = resp({
       data: res
     });
@@ -59,8 +59,8 @@ const findOne = async (ctx, next) => {
  */
 const create = async (ctx, next) => {
   const query = ctx.request.body;
-  const isExit = await userService.findOne({mobile: query.mobile});
-  if(isExit) {
+  const isExit = await userService.findOne({ mobile: query.mobile });
+  if (isExit) {
     ctx.body = resp({
       isOk: false,
       code: -1,
@@ -77,9 +77,64 @@ const create = async (ctx, next) => {
     data: res
   })
 };
+/**
+ * @description signIn
+ * @param {*} ctx
+ * @param {*} next
+ */
+const signIn = async (ctx, next) => {
+  const query = ctx.request.body;
+  const quertObj = {
+    mobile: query.mobile,
+    password: query.password
+  }
+  const res = await userService.findOne(quertObj);
+  if (res) {
+    ctx.session.user = res
+    ctx.body = resp({
+      data: res
+    });
+  } else {
+    ctx.body = resp({
+      isOk: false,
+      code: -1,
+      data: '登录异常'
+    });
+  }
+};
+/**
+ * @description getUserInfo
+ * @param {*} ctx
+ * @param {*} next
+ */
+const getUserInfo = async (ctx, next) => {
+  const sessionId = ctx.cookies.get('clearives')
+  if (!sessionId) {
+    ctx.body = resp({
+      isOk: false,
+      code: 412,
+      data: '未登录'
+    })
+  }
+  const resSession = await ctx.state.redis.get(`SESSION:${sessionId}`)
+
+  if (resSession) {
+    ctx.body = resp({
+      data: (JSON.parse(resSession)).user
+    });
+  } else {
+    ctx.body = resp({
+      isOk: false,
+      code: -1,
+      data: '登录异常'
+    });
+  }
+};
 
 export default {
   findAll,
   findOne,
-  create
+  create,
+  signIn,
+  getUserInfo
 }

@@ -20,6 +20,7 @@
     "koa-bodyparser": "^4.2.1",
     "koa-compose": "^4.1.0",
     "koa-router": "^7.4.0",
+    "koa-session2": "^2.2.10",
     "mongoose": "^5.7.12",
     "shortid": "^2.2.15"
   },
