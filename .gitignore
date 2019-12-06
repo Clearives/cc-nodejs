@@ -1,7 +1,9 @@
 # Dependency directories
 node_modules/
+/jwt/
 
 # service/koa-react-ssr/dist
 dist
 
 service/koa-mongo-case/build
+service/koa-mongo-case/db

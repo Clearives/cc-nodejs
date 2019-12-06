@@ -1,13 +1,14 @@
-const redisIp = '127.0.0.1'
+const isProd = process.env.NODE_ENV === 'production'
+const redisIp = isProd ? 'redis' : '127.0.0.1'
 export default {
   db: {
-    mongodbUrl: 'mongodb://localhost:27017/jwt'
+    mongodbUrl: isProd ? 'mongodb://mongo:27017/jwt' : 'mongodb://localhost:27017/jwt'
   },
   secret: 'clearives-secret',
   redisConfig: {
     "port": 6379,
     "prefix": "cc-nodejs:",
-    "host": "127.0.0.1",
+    "host": redisIp,
     "family": 4,
     "db": 0
   },
