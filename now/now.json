@@ -1,0 +1,24 @@
+{
+  "version": 2,
+  "name": "now-clearives",
+  "builds": [
+    {
+      "src": "api/*",
+      "use": "@now/node"
+    },
+    {
+      "src": "view/**/*",
+      "use": "@now/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/",
+      "dest": "view/index.html"
+    },
+    {
+      "src": "/api/oauth",
+      "dest": "/api/oauth.js"
+    }
+  ]
+}
