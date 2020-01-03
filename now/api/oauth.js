@@ -25,23 +25,22 @@ const oauth = async ctx => {
     });
     const access_token = tokenData.data.access_token;
     
-    const userData = await axios({
-      method: 'get',
-      url: `https://api.github.com/user`,
-      headers: {
-        Authorization: `token ${access_token}`
-      }
-    });
+    // const userData = await axios({
+    //   method: 'get',
+    //   url: `https://api.github.com/user`,
+    //   headers: {
+    //     Authorization: `token ${access_token}`
+    //   }
+    // });
+    
     ctx.body = {
       code: 200,
       data: {
         joke: 'severLess', 
-        access_token,
-        user: userData.data
+        access_token
       }
     }
   } catch (err) {
-    console.log('err', err)
     ctx.body = {
       code: err.status || -1,
       message: err.message

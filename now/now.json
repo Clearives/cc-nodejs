@@ -1,24 +1,18 @@
 {
   "version": 2,
-  "name": "now-clearives",
+  "name": "clearives",
   "builds": [
     {
-      "src": "api/*",
+      "src": "api/**/*",
       "use": "@now/node"
     },
-    {
-      "src": "view/**/*",
-      "use": "@now/static"
-    }
+    { "src": "next.config.js", "use": "@now/next" }
   ],
   "routes": [
-    {
-      "src": "/",
-      "dest": "view/index.html"
-    },
-    {
-      "src": "/api/oauth",
-      "dest": "/api/oauth.js"
-    }
-  ]
+    { "src": "/api/(.*)/(.*)", "dest": "/api/$1/$2.js" },
+    { "src": "/api/(.*)", "dest": "/api/$1.js" }
+  ],
+  "env": {
+    "baseUrl": "https://clearives.now.sh"
+  }
 }
