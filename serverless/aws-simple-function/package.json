@@ -1,0 +1,17 @@
+{
+  "name": "aws-simple-function",
+  "version": "1.0.0",
+  "description": "aws-simple-function",
+  "main": "handler.js",
+  "scripts": {
+    "start": "serverless offline start",
+    "deploy": "serverless deploy -v"
+  },
+  "keywords": [],
+  "author": "clearives",
+  "license": "ISC",
+  "devDependencies": {
+    "serverless": "^1.60.5",
+    "serverless-offline": "^5.12.1"
+  }
+}

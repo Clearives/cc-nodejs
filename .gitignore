@@ -9,3 +9,6 @@ service/koa-mongo-case/build
 service/koa-mongo-case/db
 
 .next
+
+.serverless
+aws-nodejs-typescript
