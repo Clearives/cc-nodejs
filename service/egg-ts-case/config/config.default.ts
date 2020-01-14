@@ -19,6 +19,7 @@ export default (appInfo: EggAppInfo) => {
   return {
     ...config,
     ...bizConfig,
+    middleware: [ 'errorHandler' ],
     mongoose: {
       url: 'mongodb://localhost:27018/jwt',
       option: {
